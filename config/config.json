@@ -1,20 +1,20 @@
 {
   "development": {
-    "username": "tamu",
+    "username": "tamu1",
     "password": "magangjesicatamu",
     "database": "bukutamu_app",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
-    "username": "tamu",
+    "username": "tamu1",
     "password": "magangjesicatamu",
     "database": "bukutamu_app",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
-    "username": "tamu",
+    "username": "tamu1",
     "password": "magangjesicatamu",
     "database": "bukutamu_app",
     "host": "127.0.0.1",
