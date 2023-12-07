@@ -1,20 +1,15 @@
 const jwt = require('jsonwebtoken');
 
 const authenticateToken = (request, response, next) => {
-    const token = request.header('Authorization');
+    try {
+        const token = request.headers.authorization.split(" ")[1];
+        const decoded = jwt.verify(token, 'bukutamu');
 
-    if (!token) {
+        request.user = decoded;
+        next();
+    } catch (error) {
         return response.status(401).json({ message: 'Unauthorized' });
     }
-
-    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-        if (err) {
-            return response.status(403).json({ message: 'Forbidden' });
-        }
-
-        request.user = user;
-        next();
-    });
 };
 
 module.exports = { authenticateToken };

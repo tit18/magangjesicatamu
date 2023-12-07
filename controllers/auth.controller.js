@@ -5,7 +5,7 @@ require ('dotenv').config;
 
 
 const generateToken = (userId) => {
-    const token = jwt.sign({ userId }, 'bukutamu', { expiresIn: '1h' });
+    const token = jwt.sign({ userId }, 'bukutamu', { expiresIn: '12h' });
     return token;
 };
 
@@ -23,7 +23,7 @@ exports.login = async (request, response) => {
 
         const token = generateToken(user.uuid);
 
-        return response.json({ succes: 'true', logged: 'true', nama: user.nama, token: token });
+        return response.json({ success: 'true', logged: 'true', nama: user.nama, token: token });
     } catch (error) {
         console.error(error);
         console.log(resepsionisModel);

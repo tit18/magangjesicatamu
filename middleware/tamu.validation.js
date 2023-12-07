@@ -12,7 +12,9 @@ const validateTamu = (request, response, next) => {
             janjian: Joi.string().optional(),
             tanggal_masuk: Joi.string().optional(),
             foto: Joi.string().optional(),
-            testimoni: Joi.string().optional()
+            testimoni: Joi.string().optional(),
+            diterima_oleh: Joi.string().required(),
+            tanggal_keluar: Joi.string().required()
 
 
         })

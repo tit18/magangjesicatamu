@@ -25,7 +25,7 @@ exports.findTamu = async (request, response) => {
         }
     })
     return response.json({
-        succes: true,
+        success: true,
         data: tamu,
         mesagge: 'Semua tamu sudah disimpan'
     })
@@ -48,7 +48,7 @@ exports.addTamu = (request, response) => {
     tamuModel.create(newTamu)
         .then(result => {
             return response.json({
-                succes: true,
+                success: true,
                 message:'Data kunjungan tamu berhasil disimpan'
             })
         })
@@ -66,13 +66,13 @@ exports.updateTamu = (request, response) => {
     tamuModel.update(dataTamu, { where: { uuid: request.params.id } })
         .then(result => {
             return response.json({
-                succes: true,
+                success: true,
                 message: 'Data testimoni tamu berhasil disimpan'
             })
         })
         .catch(error => {
             return response.json({
-                succes: false,
+                success: false,
                 message: error.message
             })
         })

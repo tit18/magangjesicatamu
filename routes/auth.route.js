@@ -1,11 +1,12 @@
 const express = require('express');
 const authController = require('../controllers/auth.controller');
 const jwt = require('jsonwebtoken');
+let { BasicAuth } = require('../middleware/basicauth')
 //const SECRET_KEY = "Buku_Tamu_App";
 //auth = (request, response, next) => {
     const router = express.Router();
 
-router.post('/api/v1/halaman/login', authController.login);
+router.post('/api/v1/halaman/login', [BasicAuth], authController.login);
 
 // let header = request.headers.authorization;
 // let token = header && header.split(" ")[1];
