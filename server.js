@@ -15,13 +15,7 @@ app.use(cors())
 
 app.use('/api/v1/halaman', tamuRoute)
 app.use('/api/v1/halaman', paketRoute)
-app.get('/', (request, response) => {
-   const result = {
-    message: 'Welcome to Buku Tamu', 
-    route: ['/api/v1/halaman']
-};
-return response(200).json({ success: true, message: result });
-})
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 
@@ -29,7 +23,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/auth', authRoutes);
 
 
-
+app.get('/', (request, response) => {
+    const result = {
+     message: 'Welcome to Buku Tamu', 
+     route: ['/api/v1/halaman']
+ };
+ response.json({ success: true, message: result });
+ });
 app.get('/protected', authenticateToken, (request, response) => {
     response.json({ message: 'This is a protected route', user: request.user });
 });
