@@ -6,6 +6,7 @@ const cors = require('cors');
 const tamuRoute = require('./routes/histori_tamu.route');
 const paketRoute = require('./routes/paket_barang.route');
 const path = require('path');
+require ('dotenv').config();
 
 const app = express();
 app.use(express.json());
@@ -20,7 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 
-app.use('/auth', authRoutes);
+app.use('/api/v1/halaman', authRoutes);
 
 
 app.get('/', (request, response) => {
