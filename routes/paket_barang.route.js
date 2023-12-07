@@ -10,8 +10,8 @@ app.use(express.json())
 
 const paketController = require('../controllers/paket.barang.controller')
 
-app.post('/api/v1/halaman/kurir', [BasicAuth], [validatePaket], [upload.single('foto')], paketController.addPaketBarang)
-app.put('/api/v1/halaman/kurir/konfirmasi/:id', [authenticateToken], [validatePaket], paketController.updatePaket)
+app.post('/kurir', [BasicAuth], [validatePaket], [upload.single('foto')], paketController.addPaketBarang)
+app.put('/kurir/konfirmasi/:id', [authenticateToken], [validatePaket], paketController.updatePaket)
 app.use(express.static(__dirname))
 
 module.exports = app

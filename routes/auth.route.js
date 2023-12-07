@@ -6,7 +6,7 @@ let { BasicAuth } = require('../middleware/basicauth')
 //auth = (request, response, next) => {
     const router = express.Router();
 
-router.post('/api/v1/halaman/login', [BasicAuth], authController.login);
+router.post('/login', [BasicAuth], authController.login);
 
 // let header = request.headers.authorization;
 // let token = header && header.split(" ")[1];

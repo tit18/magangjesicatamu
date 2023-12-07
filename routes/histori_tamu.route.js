@@ -11,8 +11,8 @@ app.use(express.json())
 const tamuController = require('../controllers/histori.tamu.controller')
 
 
-app.post('/api/v1/halaman/tamu', [BasicAuth], [validateTamu], [upload.single(`foto`)], tamuController.addTamu)
-app.put('/api/v1/halaman/tamu/testimoni/:id', [authenticateToken], [validateTamu], tamuController.updateTamu)
+app.post('/tamu', [BasicAuth], [validateTamu], [upload.single(`foto`)], tamuController.addTamu)
+app.put('/tamu/testimoni/:id', [authenticateToken], [validateTamu], tamuController.updateTamu)
 app.use(express.static(__dirname))
 
 module.exports = app

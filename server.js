@@ -13,12 +13,12 @@ app.use(cors())
 
 
 
-app.use('/tamu', tamuRoute)
-app.use('/kurir', paketRoute)
+app.use('/api/v1/halaman', tamuRoute)
+app.use('/api/v1/halaman', paketRoute)
 app.get('/', (request, response) => {
    const result = {
     message: 'Welcome to Buku Tamu', 
-    route: ['/api/v1/']
+    route: ['/api/v1/halaman']
 };
 return response(200).json({ success: true, message: result });
 })
