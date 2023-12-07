@@ -18,7 +18,7 @@ exports.login = async (request, response) => {
         const pass = bcrypt.hash(password.toString(), 15);
 
         if (!user || !(bcrypt.compare((await pass).toString(), user.password))) {
-            return response.status(401).json({ message: 'Invalid credentials' });
+            return response.status(201).json({ message: 'Invalid credentials' });
         }
 
         const token = generateToken(user.uuid);
