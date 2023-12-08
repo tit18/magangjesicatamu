@@ -8,6 +8,7 @@ const validatePaket = (request, response, next) => {
             no_wa_kurir: Joi.number().optional(),
             nama_penerima: Joi.string().optional(),
             tanggal_datang: Joi.string().optional(),
+            foto: Joi().optional(),
             tanggal_pengambilan: Joi.string().optional(),
             status: Joi.boolean().optional()
 
