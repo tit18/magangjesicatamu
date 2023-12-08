@@ -9,11 +9,11 @@ const validateTamu = (request, response, next) => {
             nama_dituju: Joi.string().optional(),
             keperluan: Joi.string().optional(),
             jumlah_tamu: Joi.number().optional(),
-            janjian: Joi.string().optional(),
+            janjian: Joi.boolean().optional(),
             tanggal_masuk: Joi.string().optional(),
             foto: Joi.string().optional(),
             testimoni: Joi.string().optional(),
-            diterima_oleh: Joi.string().required(),
+            diterima_oleh: Joi.string().optional(),
             tanggal_keluar: Joi.string().required()
 
 
