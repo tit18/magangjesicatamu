@@ -12,6 +12,7 @@ const paketController = require('../controllers/paket.barang.controller')
 
 app.post('/kurir', [BasicAuth], [validatePaket], [upload.single('foto')], paketController.addPaketBarang)
 app.put('/kurir/konfirmasi/:id', [authenticateToken], [validatePaket], paketController.updatePaket)
+app.get('/kurir/histori', [authenticateToken], paketController.getAllHistoriKurir)
 app.use(express.static(__dirname))
 
 module.exports = app

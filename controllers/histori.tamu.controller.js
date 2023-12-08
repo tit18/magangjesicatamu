@@ -13,7 +13,7 @@ exports.getAllHistoriTamu = async (req, res, next) => {
 
     if (date !== '' && typeof date !== 'undefined') {
         paramQuerySQL.where = {
-             
+            tanggal_masuk: {[ Op.substring]: date }
         };
         if (search !== '' && typeof search !== 'undefined'){
             paramQuerySQL.where = {
