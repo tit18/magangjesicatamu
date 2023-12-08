@@ -3,6 +3,7 @@ const Op = require('sequelize').Op
 const upload = require('./upload-foto').single(`gambar`)
 const {v4: uuidv4} = require('uuid');
 const uuid = uuidv4();
+const { HistoriTamu, Sequelize } = require('../models/index').histori_paket_barang;
 
 exports.addPaketBarang = (request, response) => {
     let newPaket = {
@@ -48,3 +49,4 @@ exports.updatePaket = (request, response) => {
             })
         })
 }
+

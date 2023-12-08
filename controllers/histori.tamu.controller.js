@@ -3,33 +3,105 @@ const Op = require('sequelize').Op
 const upload = require(`./upload-cover`).single(`cover`)
 const {v4: uuidv4} = require('uuid');
 const uuid = uuidv4();
+const HistoriTamu = require('../models/index').histori_tamu;
 
-exports.getAllTamu = async (request, response) => {
-    let tamu = await tamuModel.findAll()
-    return response.json({
-        succes:true,
-        data:tamu,
-        message: ''
-    })
-}
+exports.getAllHistoriTamu = async (req, res, next) => {
+    let { date, sort, page, quantity, search } = req.query;
+    const paramQuerySQL = {};
+    let limit;
+    let offset;
 
-exports.findTamu = async (request, response) => {
-    let keyword = request.body.keyword
-
-    let tamu = await tamuModel.findAll({
-        where: {
-            [Op.or]: [
-                { nama_pengunjung: { [Op.substring]: keyword} },
-                { asal_instansi: { [Op.substring]: keyword} }
-            ]
+    if (date !== '' && typeof date !== 'undefined') {
+        paramQuerySQL.where = {
+             
+        };
+        if (search !== '' && typeof search !== 'undefined'){
+            paramQuerySQL.where = {
+                [Op.and]: [
+                    {
+                        [Op.or]: [
+                            { nama_pengunjung: { [Op.substring]: search }},
+                            { asal_instansi: { [Op.substring]: search }},
+                            { nama_dituju: { [Op.substring]: search }}
+                        ]
+                    }, 
+                    {
+                        tanggal_masuk: {[ Op.substring]: date }
+                    }
+                ]
+            }
         }
-    })
-    return response.json({
-        success: true,
-        data: tamu,
-        mesagge: 'Semua tamu sudah disimpan'
-    })
-}
+        
+    }
+
+    if (sort !== '' && typeof sort !== 'undefined') {
+        let query;
+        if (sort.charAt(0) !== '-') {
+            query = [[sort, 'ASC']];
+        } else {
+            query = [[sort.replace('-',''), 'DESC']];
+        }
+
+        paramQuerySQL.order = query;
+    }
+    
+    if (quantity !== '' && typeof quantity !== 'undefined' && page !== '' && typeof page !== 'undefined') {
+        if (quantity !== '' && typeof quantity !== 'undefined') {
+            limit = Number (quantity);
+            paramQuerySQL.limit = limit;
+        }
+
+        if (page !== '' && typeof page !== 'undefined') {
+            offset = page * limit - limit;
+            paramQuerySQL.offset = offset;
+        }
+    } else {
+        page = 1;
+        limit = 50;
+        offset = 0;
+        paramQuerySQL.limit = limit;
+        paramQuerySQL.offset = offset;
+    }
+
+    try {
+        const data = await HistoriTamu.findAll(paramQuerySQL);
+        const DataAll = await HistoriTamu.findAll();
+        const currentPage = page;
+        const totalData = DataAll.length;
+        const quantityData = data.length;
+        if (data) {
+            res.status(200).json({ 
+                success: true, 
+                data: data,
+                meta: {
+                    currentPage: currentPage,
+                    quantity: quantityData,
+                    totalData: totalData
+                }
+            });
+        }
+    } catch (err) {
+        next(err);
+    }
+};
+
+// exports.findTamu = async (request, response) => {
+//     let keyword = request.body.keyword
+
+//     let tamu = await tamuModel.findAll({
+//         where: {
+//             [Op.or]: [
+//                 { nama_pengunjung: { [Op.substring]: keyword} },
+//                 { asal_instansi: { [Op.substring]: keyword} }
+//             ]
+//         }
+//     })
+//     return response.json({
+//         success: true,
+//         data: tamu,
+//         mesagge: 'Semua tamu sudah disimpan'
+//     })
+// }
 
 exports.addTamu = (request, response) => {
     let newTamu = {

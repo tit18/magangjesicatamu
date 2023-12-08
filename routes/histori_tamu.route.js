@@ -13,6 +13,7 @@ const tamuController = require('../controllers/histori.tamu.controller')
 
 app.post('/tamu', [BasicAuth], [validateTamu], [upload.single(`foto`)], tamuController.addTamu)
 app.put('/tamu/testimoni/:id', [authenticateToken], [validateTamu], tamuController.updateTamu)
+app.get('/tamu/histori', [authenticateToken], tamuController.getAllHistoriTamu)
 app.use(express.static(__dirname))
 
 module.exports = app
