@@ -14,7 +14,7 @@ exports.addPaketBarang = (request, response) => {
         tanggal_datang: request.body.tanggal_datang,
         tanggal_pengambilan: request.body.tanggal_pengambilan,
         foto: request.body.foto,
-        status: request.body.status
+        status: false
     }
 
     paketModel.create(newPaket) 
