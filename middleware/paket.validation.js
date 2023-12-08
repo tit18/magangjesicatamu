@@ -9,7 +9,6 @@ const validatePaket = (request, response, next) => {
             nama_penerima: Joi.string().optional(),
             tanggal_datang: Joi.string().optional(),
             tanggal_pengambilan: Joi.string().optional(),
-            foto: Joi.string().optional(),
             status: Joi.boolean().optional()
 
         })
