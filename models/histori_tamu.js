@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     tanggal_keluar: DataTypes.DATE,
     foto: DataTypes.STRING(50),
     testimoni: DataTypes.TEXT,
-    no_wa_pengunjung: DataTypes.STRING(255),
+    no_wa_pengunjung: DataTypes.STRING(50),
     ditemui_oleh: DataTypes.STRING(50)
   }, {
     sequelize,

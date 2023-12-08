@@ -8,7 +8,7 @@ module.exports = {
         'histori_tamus',
         'no_wa_pengunjung',
         {
-          type: Sequelize.STRING(255),
+          type: Sequelize.STRING(50),
           allowNull: true,
         },
       ),
