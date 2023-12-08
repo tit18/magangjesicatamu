@@ -2,9 +2,9 @@ const Joi = require('joi')
 const validateTamu = (request, response, next) => {
     const rules = Joi
         .object()
-        .keys ({
+        .keys({
             nama_pengunjung: Joi.string().optional(),
-            uuid_user: Joi.string().optional(),  
+            uuid_user: Joi.string().optional(),
             asal_instansi: Joi.string().optional(),
             nama_dituju: Joi.string().optional(),
             keperluan: Joi.string().optional(),

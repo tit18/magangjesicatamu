@@ -5,10 +5,10 @@ const router = express.Router();
 
 
 router.get('/users', async (req, res) => {
-    try{
+    try {
         const user = await user.findAll();
         res.json(user);
-    }catch (error) {
+    } catch (error) {
         console.error('Error fetching user:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }

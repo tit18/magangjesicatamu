@@ -2,7 +2,7 @@ const Joi = require('joi')
 const validatePaket = (request, response, next) => {
     const rules = Joi
         .object()
-        .keys ({
+        .keys({
             uuid_user: Joi.string().optional(),
             nama_kurir: Joi.string().optional(),
             no_wa_kurir: Joi.number().optional(),

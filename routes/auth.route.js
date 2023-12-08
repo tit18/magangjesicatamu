@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 let { BasicAuth } = require('../middleware/basicauth')
 //const SECRET_KEY = "Buku_Tamu_App";
 //auth = (request, response, next) => {
-    const router = express.Router();
+const router = express.Router();
 
 router.post('/login', [BasicAuth], authController.login);
 

@@ -1,6 +1,6 @@
 const multer = require('multer')
 const path = require('path')
-const storage = multer.diskStorage ({
+const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, `./gambar`)
     },
@@ -10,7 +10,7 @@ const storage = multer.diskStorage ({
     }
 })
 
-const upload = multer ({
+const upload = multer({
     storage: storage,
     fileFilter: (req, file, cb) => {
         const acceptedType = [`image/jpg`, `image/jpeg`, `image/png`]

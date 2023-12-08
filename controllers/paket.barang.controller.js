@@ -1,7 +1,7 @@
 const paketModel = require('../models/index').histori_paket_barang
 const Op = require('sequelize').Op
 const upload = require('./upload-foto').single(`gambar`)
-const {v4: uuidv4} = require('uuid');
+const { v4: uuidv4 } = require('uuid');
 const uuid = uuidv4();
 const HistoriKurir = require('../models/index').histori_paket_barang;
 
@@ -18,7 +18,7 @@ exports.addPaketBarang = (request, response) => {
         status: false
     }
 
-    paketModel.create(newPaket) 
+    paketModel.create(newPaket)
         .then(result => {
             return response.json({
                 succes: true,
@@ -58,24 +58,24 @@ exports.getAllHistoriKurir = async (req, res, next) => {
 
     if (date !== '' && typeof date !== 'undefined') {
         paramQuerySQL.where = {
-            tanggal_datang: {[ Op.substring]: date }
+            tanggal_datang: { [Op.substring]: date }
         };
-        if (search !== '' && typeof search !== 'undefined'){
+        if (search !== '' && typeof search !== 'undefined') {
             paramQuerySQL.where = {
                 [Op.and]: [
                     {
                         [Op.or]: [
-                            { nama_kurir: { [Op.substring]: search }},
-                            { nama_penerima: { [Op.substring]: search }}
+                            { nama_kurir: { [Op.substring]: search } },
+                            { nama_penerima: { [Op.substring]: search } }
                         ]
-                    }, 
+                    },
                     {
-                        tanggal_datang: {[ Op.substring]: date }
+                        tanggal_datang: { [Op.substring]: date }
                     }
                 ]
             }
         }
-        
+
     }
 
     if (sort !== '' && typeof sort !== 'undefined') {
@@ -83,15 +83,15 @@ exports.getAllHistoriKurir = async (req, res, next) => {
         if (sort.charAt(0) !== '-') {
             query = [[sort, 'ASC']];
         } else {
-            query = [[sort.replace('-',''), 'DESC']];
+            query = [[sort.replace('-', ''), 'DESC']];
         }
 
         paramQuerySQL.order = query;
     }
-    
+
     if (quantity !== '' && typeof quantity !== 'undefined' && page !== '' && typeof page !== 'undefined') {
         if (quantity !== '' && typeof quantity !== 'undefined') {
-            limit = Number (quantity);
+            limit = Number(quantity);
             paramQuerySQL.limit = limit;
         }
 
@@ -114,8 +114,8 @@ exports.getAllHistoriKurir = async (req, res, next) => {
         const totalData = DataAll.length;
         const quantityData = data.length;
         if (data) {
-            res.status(200).json({ 
-                success: true, 
+            res.status(200).json({
+                success: true,
                 data: data,
                 meta: {
                     currentPage: currentPage,

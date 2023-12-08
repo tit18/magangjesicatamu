@@ -1,11 +1,11 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const resepsionisModel = require('../models/index').resepsionis;
-require ('dotenv').config;
+require('dotenv').config;
 
 
 const generateToken = (userId) => {
-    const token = jwt.sign({ userId }, process.env.JWT_SECRET , { expiresIn: '12h' });
+    const token = jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: '12h' });
     return token;
 };
 

@@ -1,7 +1,7 @@
 const tamuModel = require('../models/index').histori_tamu;
 const Op = require('sequelize').Op
 const upload = require(`./upload-cover`).single(`cover`)
-const {v4: uuidv4} = require('uuid');
+const { v4: uuidv4 } = require('uuid');
 const uuid = uuidv4();
 const HistoriTamu = require('../models/index').histori_tamu;
 
@@ -13,25 +13,25 @@ exports.getAllHistoriTamu = async (req, res, next) => {
 
     if (date !== '' && typeof date !== 'undefined') {
         paramQuerySQL.where = {
-            tanggal_masuk: {[ Op.substring]: date }
+            tanggal_masuk: { [Op.substring]: date }
         };
-        if (search !== '' && typeof search !== 'undefined'){
+        if (search !== '' && typeof search !== 'undefined') {
             paramQuerySQL.where = {
                 [Op.and]: [
                     {
                         [Op.or]: [
-                            { nama_pengunjung: { [Op.substring]: search }},
-                            { asal_instansi: { [Op.substring]: search }},
-                            { nama_dituju: { [Op.substring]: search }}
+                            { nama_pengunjung: { [Op.substring]: search } },
+                            { asal_instansi: { [Op.substring]: search } },
+                            { nama_dituju: { [Op.substring]: search } }
                         ]
-                    }, 
+                    },
                     {
-                        tanggal_masuk: {[ Op.substring]: date }
+                        tanggal_masuk: { [Op.substring]: date }
                     }
                 ]
             }
         }
-        
+
     }
 
     if (sort !== '' && typeof sort !== 'undefined') {
@@ -39,15 +39,15 @@ exports.getAllHistoriTamu = async (req, res, next) => {
         if (sort.charAt(0) !== '-') {
             query = [[sort, 'ASC']];
         } else {
-            query = [[sort.replace('-',''), 'DESC']];
+            query = [[sort.replace('-', ''), 'DESC']];
         }
 
         paramQuerySQL.order = query;
     }
-    
+
     if (quantity !== '' && typeof quantity !== 'undefined' && page !== '' && typeof page !== 'undefined') {
         if (quantity !== '' && typeof quantity !== 'undefined') {
-            limit = Number (quantity);
+            limit = Number(quantity);
             paramQuerySQL.limit = limit;
         }
 
@@ -70,8 +70,8 @@ exports.getAllHistoriTamu = async (req, res, next) => {
         const totalData = DataAll.length;
         const quantityData = data.length;
         if (data) {
-            res.status(200).json({ 
-                success: true, 
+            res.status(200).json({
+                success: true,
                 data: data,
                 meta: {
                     currentPage: currentPage,
@@ -105,7 +105,7 @@ exports.getAllHistoriTamu = async (req, res, next) => {
 
 exports.addTamu = (request, response) => {
     let newTamu = {
-        uuid: uuid, 
+        uuid: uuid,
         nama_pengunjung: request.body.nama_pengunjung,
         uuid_user: request.body.uuid_user,
         asal_instansi: request.body.asal_instansi,
@@ -121,7 +121,7 @@ exports.addTamu = (request, response) => {
         .then(result => {
             return response.json({
                 success: true,
-                message:'Data kunjungan tamu berhasil disimpan'
+                message: 'Data kunjungan tamu berhasil disimpan'
             })
         })
 }

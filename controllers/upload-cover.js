@@ -21,7 +21,7 @@ const upload = multer({
 
         const fileSize = req.headers[`content-length`]
         const maxSize = (1 * 1024 * 1024)
-        if(fileSize > maxSize){
+        if (fileSize > maxSize) {
             cb(null, false)
             return cb(`File size is too large`)
         }
