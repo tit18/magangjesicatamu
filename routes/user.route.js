@@ -1,17 +1,15 @@
 const express = require('express');
-const user = require('../models/user');
+let { BasicAuth } = require('../middleware/basicauth')
 
-const router = express.Router();
+const app = express()
+
+app.use(express.json())
+
+const userController = require('../controllers/user.controller')
+
+app.get('/user' ,[BasicAuth], userController.getAllUser)
 
 
-router.get('/users', async (req, res) => {
-    try {
-        const user = await user.findAll();
-        res.json(user);
-    } catch (error) {
-        console.error('Error fetching user:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-});
 
-module.exports = router;
+
+module.exports = app;
