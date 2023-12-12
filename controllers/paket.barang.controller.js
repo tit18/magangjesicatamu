@@ -14,7 +14,7 @@ exports.addPaketBarang = (request, response) => {
         nama_penerima: request.body.nama_penerima,
         tanggal_datang: request.body.tanggal_datang,
         tanggal_pengambilan: request.body.tanggal_pengambilan,
-        foto: request.body.foto,
+        foto: request.file.filename,
         status: false
     }
 

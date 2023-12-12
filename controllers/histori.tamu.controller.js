@@ -114,7 +114,7 @@ exports.addTamu = (request, response) => {
         jumlah_tamu: request.body.jumlah_tamu,
         janjian: request.body.janjian,
         tanggal_masuk: request.body.tanggal_masuk,
-        foto: request.body.foto
+        foto: request.file.filename
     }
 
     tamuModel.create(newTamu)
