@@ -6,7 +6,7 @@ const storage = multer.diskStorage({
     },
 
     filename: (req, file, cb) => {
-        cb(null, `cover-${Date.now()}${path.extname(file.originalname)}`)
+        cb(null, `tamu-${Date.now()}${path.extname(file.originalname)}`)
     }
 })
 
