@@ -8,7 +8,7 @@ let { authenticateToken } = require('../middleware/auth.middleware')
 const app = express()
 
 app.use(express.json())
-
+app.use(express.urlencoded({ extended: true }));
 
 app.post('/kurir', [BasicAuth], [validatePaket], [upload.single('foto')], paketController.addPaketBarang)
 app.put('/kurir/konfirmasi/:id', [authenticateToken], [updateValidatePaket], paketController.updatePaket)
