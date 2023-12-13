@@ -121,7 +121,7 @@ exports.addTamu = async (request, response) => {
     const user = await userModel.findOne({ where: {uuid: request.body.uuid_user}});
     if (user == null) {
         return response.json({
-            success: true,
+            success: false,
             message: 'User penerima tidak ditemukan'
         })
     } else {
