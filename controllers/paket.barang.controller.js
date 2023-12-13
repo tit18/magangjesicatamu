@@ -33,6 +33,10 @@ exports.addPaketBarang = async (request, response) => {
                 succes: true,
                 message: "Data Penerimaan paket Barang berhasil disimpan"
             })
+        }).catch(error => {
+            return response.json({
+                success: false, message: error
+            })
         })
     }
     } catch (error) {
