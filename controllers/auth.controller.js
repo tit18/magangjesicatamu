@@ -14,11 +14,12 @@ exports.login = async (request, response) => {
 
     try {
         const user = await resepsionisModel.findOne({ where: { email } });
-
-        const pass = bcrypt.hash(password.toString(), 15);
-
-        if (!user || !(bcrypt.compare((await pass).toString(), user.password))) {
-            return response.status(201).json({ message: 'Invalid credentials' });
+        const credential =  await bcrypt.compare(password, user.password);
+        if (!user) {
+            return response.status(201).json({success: 'true', logged: 'false', message: 'Invalid Email' });
+        }
+        if (!credential) {
+            return response.status(201).json({success: 'true', logged: 'false', message: 'Invalid Password' });
         }
 
         const token = generateToken(user.uuid);
