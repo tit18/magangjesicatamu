@@ -118,7 +118,9 @@ exports.addTamu = async (request, response) => {
         no_wa_pengunjung: request.body.no_wa_pengunjung,
         foto: request.file.filename
     }
+    try {
 
+    
     const user = await userModel.findOne({ where: {uuid: request.body.uuid_user}});
     if (user == null) {
         return response.json({
@@ -134,6 +136,11 @@ exports.addTamu = async (request, response) => {
             })
         })
     }
+    } catch (error) {
+        console.error(error);
+        console.log(tamuModel);
+        return response.status(500).json({ message: error });
+    }
     // tamuModel.create(newTamu)
     //     .then(result => {
     //         return response.json({
@@ -142,7 +149,9 @@ exports.addTamu = async (request, response) => {
     //         })
     //     })
     
+
 }
+
 
 exports.updateTamu = (request, response) => {
     let dataTamu = {

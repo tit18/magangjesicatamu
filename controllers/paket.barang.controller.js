@@ -18,6 +18,7 @@ exports.addPaketBarang = async (request, response) => {
         foto: request.file.filename,
         status: false
     }
+    try {
 
     const user = await userModel.findOne({ where: {uuid: request.body.uuid_user}});
     if (user == null) {
@@ -33,6 +34,11 @@ exports.addPaketBarang = async (request, response) => {
                 message: "Data Penerimaan paket Barang berhasil disimpan"
             })
         })
+    }
+    } catch (error) {
+        console.error(error);
+        console.log(paketModel);
+        return response.status(500).json({ message: error });
     }
 
     

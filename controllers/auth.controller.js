@@ -28,6 +28,6 @@ exports.login = async (request, response) => {
     } catch (error) {
         console.error(error);
         console.log(resepsionisModel);
-        return response.status(500).json({ message: 'Internal Server Error' });
+        return response.status(500).json({ message: error });
     }
 };
