@@ -38,7 +38,8 @@ app.get('/protected', authenticateToken, (request, response) => {
 // }).catch((error) => {
 //     console.error('Error syncing database: ', error);
 // });
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/api/v1/halaman/tamu/media', express.static(path.join(__dirname, 'public/cover')));
+app.use('/api/v1/halaman/kurir/media', express.static(path.join(__dirname, 'public/gambar')));
 const PORT = process.env.PORT || 3002;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
