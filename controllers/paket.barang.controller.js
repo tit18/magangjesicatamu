@@ -2,10 +2,11 @@ const paketModel = require('../models/index').histori_paket_barang
 const Op = require('sequelize').Op
 const upload = require('./upload-foto').single(`gambar`)
 const { v4: uuidv4 } = require('uuid');
+const userModel = require('../models/index').user
 const uuid = uuidv4();
 const HistoriKurir = require('../models/index').histori_paket_barang;
 
-exports.addPaketBarang = (request, response) => {
+exports.addPaketBarang = async (request, response) => {
     let newPaket = {
         uuid: uuid,
         uuid_user: request.body.uuid_user,
@@ -18,13 +19,23 @@ exports.addPaketBarang = (request, response) => {
         status: false
     }
 
-    paketModel.create(newPaket)
+    const user = await userModel.findOne({ where: {uuid: request.body.uuid_user}});
+    if (user == null) {
+        return response.json({
+            success: false,
+            message: 'User penerima tidak ditemukan'
+        })
+    } else {
+        paketModel.create(newPaket)
         .then(result => {
             return response.json({
                 succes: true,
                 message: "Data Penerimaan paket Barang berhasil disimpan"
             })
         })
+    }
+
+    
 }
 
 exports.updatePaket = (request, response) => {

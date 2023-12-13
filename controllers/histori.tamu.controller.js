@@ -115,6 +115,7 @@ exports.addTamu = async (request, response) => {
         jumlah_tamu: request.body.jumlah_tamu,
         janjian: request.body.janjian,
         tanggal_masuk: request.body.tanggal_masuk,
+        no_wa_pengunjung: request.body.no_wa_pengunjung,
         foto: request.file.filename
     }
 
