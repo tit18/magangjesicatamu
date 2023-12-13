@@ -9,7 +9,7 @@ const app = express()
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
-app.post('/tamu', [BasicAuth], [validateTamu], [upload.single(`foto`)], tamuController.addTamu)
+app.post('/tamu', [BasicAuth], [upload.single(`foto`)], tamuController.addTamu)
 app.put('/tamu/testimoni/:id', [authenticateToken], [updateValidateTamu], tamuController.updateTamu)
 app.get('/tamu/histori', [authenticateToken], tamuController.getAllHistoriTamu)
 app.use(express.static(__dirname))
