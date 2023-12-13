@@ -1,4 +1,5 @@
 const tamuModel = require('../models/index').histori_tamu;
+const userModel = require('../models/index').user
 const Op = require('sequelize').Op
 const upload = require(`./upload-cover`).single(`cover`)
 const { v4: uuidv4 } = require('uuid');
@@ -103,7 +104,7 @@ exports.getAllHistoriTamu = async (req, res, next) => {
 //     })
 // }
 
-exports.addTamu = (request, response) => {
+exports.addTamu = async (request, response) => {
     let newTamu = {
         uuid: uuid,
         nama_pengunjung: request.body.nama_pengunjung,
@@ -117,6 +118,21 @@ exports.addTamu = (request, response) => {
         foto: request.file.filename
     }
 
+    // const user = await userModel.findOne({ where: {uuid_user}});
+    // if (user == null) {
+    //     return response.json({
+    //         success: true,
+    //         message: 'User penerima tidak ditemukan'
+    //     })
+    // } else {
+    //     tamuModel.create(newTamu)
+    //     .then(result => {
+    //         return response.json({
+    //             success: true,
+    //             message: 'Data kunjungan tamu berhasil disimpan'
+    //         })
+    //     })
+    // }
     tamuModel.create(newTamu)
         .then(result => {
             return response.json({
@@ -124,6 +140,7 @@ exports.addTamu = (request, response) => {
                 message: 'Data kunjungan tamu berhasil disimpan'
             })
         })
+    
 }
 
 exports.updateTamu = (request, response) => {

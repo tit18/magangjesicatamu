@@ -20,7 +20,7 @@ const validateTamu = (request, response, next) => {
 
         })
         .options({ abortEarly: false })
-
+        console.log (request.body)
     let { error } = rules.validate(request.body)
     if (error != null) {
         let errMessage = error.details.map(it => it.message).join(",")
