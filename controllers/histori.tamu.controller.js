@@ -118,28 +118,28 @@ exports.addTamu = async (request, response) => {
         foto: request.file.filename
     }
 
-    // const user = await userModel.findOne({ where: {uuid_user}});
-    // if (user == null) {
-    //     return response.json({
-    //         success: true,
-    //         message: 'User penerima tidak ditemukan'
-    //     })
-    // } else {
-    //     tamuModel.create(newTamu)
-    //     .then(result => {
-    //         return response.json({
-    //             success: true,
-    //             message: 'Data kunjungan tamu berhasil disimpan'
-    //         })
-    //     })
-    // }
-    tamuModel.create(newTamu)
+    const user = await userModel.findOne({ where: {uuid: request.body.uuid_user}});
+    if (user == null) {
+        return response.json({
+            success: true,
+            message: 'User penerima tidak ditemukan'
+        })
+    } else {
+        tamuModel.create(newTamu)
         .then(result => {
             return response.json({
                 success: true,
                 message: 'Data kunjungan tamu berhasil disimpan'
             })
         })
+    }
+    // tamuModel.create(newTamu)
+    //     .then(result => {
+    //         return response.json({
+    //             success: true,
+    //             message: 'Data kunjungan tamu berhasil disimpan'
+    //         })
+    //     })
     
 }
 
