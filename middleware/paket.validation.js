@@ -1,5 +1,5 @@
 const Joi = require('joi')
-const validatePaket = (request, response, next) => {
+const validatePaket = async (request, response, next) => {
     const rules = Joi
         .object()
         .keys({
@@ -15,7 +15,7 @@ const validatePaket = (request, response, next) => {
         })
         .options({ abortEarly: false })
 
-    let { error } = rules.validate(request.body)
+    let { error } = await rules.validate(request.body)
     if (error != null) {
         let errMessage = error.details.map(it => it.message).join(",")
         return response.status(422).json({

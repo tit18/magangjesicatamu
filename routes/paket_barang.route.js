@@ -10,7 +10,7 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
-app.post('/kurir', [BasicAuth], [upload.single('foto')], paketController.addPaketBarang)
+app.post('/kurir', [BasicAuth],  [upload.single('foto')],[validatePaket], paketController.addPaketBarang)
 app.put('/kurir/konfirmasi/:id', [authenticateToken], [updateValidatePaket], paketController.updatePaket)
 app.get('/kurir/histori', [authenticateToken], paketController.getAllHistoriKurir)
 app.use(express.static(__dirname))

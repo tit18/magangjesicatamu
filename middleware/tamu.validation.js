@@ -1,5 +1,5 @@
 const Joi = require('joi')
-const validateTamu = (request, response, next) => {
+const validateTamu = async (request, response, next) => {
     const rules = Joi
         .object()
         .keys({
@@ -13,14 +13,12 @@ const validateTamu = (request, response, next) => {
             tanggal_masuk: Joi.string().required(),
             testimoni: Joi.string().optional(),
             no_wa_pengunjung: Joi.number().required(),
-            foto: Joi.string().allow(null),
             diterima_oleh: Joi.string().optional(),
             tanggal_keluar: Joi.string().optional()
 
         })
         .options({ abortEarly: false })
-        console.log (request.body)
-    let { error } = rules.validate(request.body)
+    let { error } = await rules.validate(request.body)
     if (error != null) {
         let errMessage = error.details.map(it => it.message).join(",")
         return response.status(422).json({
@@ -36,8 +34,9 @@ const updateValidateTamu = (request, response, next) => {
     const rules = Joi
         .object()
         .keys({
-            tanggal_pengambilan: Joi.string().optional(),
-            status: Joi.boolean().optional()
+            diterima_oleh: Joi.string().optional(),
+            tanggal_keluar: Joi.string().optional(),
+            testimoni: Joi.string().optional()
 
         })
         .options({ abortEarly: false })
