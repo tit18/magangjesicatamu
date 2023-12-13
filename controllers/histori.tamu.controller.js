@@ -122,7 +122,6 @@ exports.addTamu = async (request, response) => {
     }
     
     const user = await userModel.findOne({ where: {uuid: request.body.uuid_user}});
-        return response.json(user);
     if (user == null) {
         return response.json({
             success: false,
@@ -134,6 +133,11 @@ exports.addTamu = async (request, response) => {
             return response.json({
                 success: true,
                 message: 'Data kunjungan tamu berhasil disimpan'
+            })
+        })
+        .catch(error => {
+            return response.json({
+                success: false, message: error
             })
         })
     }
