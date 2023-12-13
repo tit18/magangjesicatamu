@@ -105,7 +105,9 @@ exports.getAllHistoriTamu = async (req, res, next) => {
 // }
 
 exports.addTamu = async (request, response) => {
-    let newTamu = {
+   
+    try {
+     let newTamu = {
         uuid: uuid,
         nama_pengunjung: request.body.nama_pengunjung,
         uuid_user: request.body.uuid_user,
@@ -118,10 +120,9 @@ exports.addTamu = async (request, response) => {
         no_wa_pengunjung: request.body.no_wa_pengunjung,
         foto: request.file.filename
     }
-    try {
-
     
     const user = await userModel.findOne({ where: {uuid: request.body.uuid_user}});
+        return response.json(user);
     if (user == null) {
         return response.json({
             success: false,
