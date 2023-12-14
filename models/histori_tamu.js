@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     nama_dituju: DataTypes.STRING(50),
     keperluan: DataTypes.STRING(50),
     jumlah_tamu: DataTypes.INTEGER(50),
-    janjian: DataTypes.STRING(50),
+    janjian: DataTypes.BOOLEAN,
     tanggal_masuk: DataTypes.DATE,
     tanggal_keluar: DataTypes.DATE,
     foto: DataTypes.STRING(50),
