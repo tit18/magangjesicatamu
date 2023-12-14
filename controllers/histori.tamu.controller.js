@@ -3,7 +3,6 @@ const userModel = require('../models/index').user
 const Op = require('sequelize').Op
 const upload = require(`./upload-cover`).single(`cover`)
 const { v4: uuidv4 } = require('uuid');
-const uuid = uuidv4();
 const HistoriTamu = require('../models/index').histori_tamu;
 
 exports.getAllHistoriTamu = async (req, res, next) => {
@@ -105,7 +104,7 @@ exports.getAllHistoriTamu = async (req, res, next) => {
 // }
 
 exports.addTamu = async (request, response) => {
-   
+    const uuid = uuidv4();
     try {
      let newTamu = {
         uuid: uuid,
